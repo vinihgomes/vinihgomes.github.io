@@ -23,7 +23,7 @@ document.querySelectorAll('input').forEach(($input) => {
 ////////////////////////     JSON            //////////////////////////////////
 function buscauf() {
   cep = cep.value.replace(/\D/g, '');
-  url = 'http://viacep.com.br/ws/' + cep + '/json';
+  url = 'https://viacep.com.br/ws/' + cep + '/json';
 
   fetch(url)
     .then((res) => res.json())
