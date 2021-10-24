@@ -21,6 +21,46 @@ document.querySelectorAll('input').forEach(($input) => {
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////     JSON            //////////////////////////////////
-let link = 'viacep.com.br/ws/';
-const archive = '/json/';
-ceplink = link + document.querySelector('input').value + archive;
+function buscauf() {
+  cep = cep.value.replace(/\D/g, '');
+  url = 'http://viacep.com.br/ws/' + cep + '/json';
+
+  fetch(url)
+    .then((res) => res.json())
+    .then(function (data) {
+      uf = data.uf;
+      return buscaCovid(data.uf);
+    });
+}
+function buscaCovid(uf) {
+  url = 'https://covid19-brazil-api.now.sh/api/report/v1/brazil/uf/' + uf;
+  fetch(url)
+    .then((res) => res.json())
+    .then(function (data) {
+      return insereDados(
+        data.uf,
+        data.state,
+        data.cases,
+        data.deaths,
+        data.suspects
+      );
+    });
+}
+
+function insereDados(uf, state, cases, deaths, suspects) {
+  container = document.querySelector('#data-table tbody');
+  const tr = document.createElement('tr');
+  tr.innerHTML = insertData(uf, state, cases, deaths, suspects);
+  container.appendChild(tr);
+
+  function insertData(unf, estado, casos, mortes, suspeitos) {
+    const html = `
+      <td>${uf}</td>
+      <td>${state}</td>
+      <td>${cases}</td>
+      <td>${deaths}</td>
+      <td>${suspects}</td>
+      `;
+    return html;
+  }
+}

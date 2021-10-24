@@ -109,8 +109,9 @@ table tbody tr:hover {
   opacity: 1;
 }
 table td {
-  background: white;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
+  text-align: center;
+  font-size: 0.1 rem;
 }
 
 table thead tr:first-child,
@@ -120,7 +121,4 @@ table tbody td:first-child {
 table thead tr:last-child,
 table tbody td:last-child {
   border-radius: 0 0.5rem 0 0.5rem;
-}
-td.description {
-  color: var(--dark-blue);
 }
