@@ -1,5 +1,5 @@
 ////////////////////////       Validação do CEP     ////////////////////////////
-const Masks = {
+let Masks = {
   cep(value) {
     return value
       .replace(/\D/g, '')
@@ -9,7 +9,7 @@ const Masks = {
 };
 
 document.querySelectorAll('input').forEach(($input) => {
-  const field = $input.dataset.js;
+  let field = $input.dataset.js;
   $input.addEventListener(
     'input',
     (e) => {
@@ -22,8 +22,8 @@ document.querySelectorAll('input').forEach(($input) => {
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////     JSON            //////////////////////////////////
 function buscauf() {
-  cep = cep.value.replace(/\D/g, '');
-  url = 'https://viacep.com.br/ws/' + cep + '/json';
+  cepNumber = cep.value.replace(/\D/g, '');
+  url = 'https://viacep.com.br/ws/' + cepNumber + '/json';
 
   fetch(url)
     .then((res) => res.json())
